@@ -1,0 +1,26 @@
+{
+  "name": "去除页面上的百度广告",
+  "version": "1.0",
+  "description": "去除页面上的百度广告",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "images/logo.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "js/jquery-1.11.1.min.js",
+        "js/main.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}
