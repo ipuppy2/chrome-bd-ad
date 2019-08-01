@@ -1,4 +1,9 @@
 let isDone = false;
+const adHost = [
+    // 百度
+    'pos.baidu.com',
+    'adaccount.csdn.net',
+];
 const timer = setInterval(() => {
     if(isDone) {
         clearInterval(timer);
@@ -13,14 +18,23 @@ function findAndRemove(){
     document.querySelectorAll('iframe').forEach((it) => {
         // http://pos.baidu.com/s?
         const src = it.getAttribute('src');
-        if(!src || src.indexOf('pos.baidu.com') == -1){
+        if(!src){
+            return;
+        }
+        let found = false;
+        adHost.some((host) => {
+            if(src.indexOf(host) != -1){
+                found = true;
+                return true;
+            }
+        });
+        if(!found){
             return;
         }
         console.log("removed: " + src);
         it.parentNode.removeChild(it);
     });
-    // 谷歌广告
-    /*document.querySelectorAll('ins').forEach(it => {
-        it.parentNode.removeChild(it);
-    })*/
+    // csdn 
+    $('.recommend-ad-box').remove();
+    $('.mediav_ad').remove();
 }
